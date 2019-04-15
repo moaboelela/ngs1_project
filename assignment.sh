@@ -13,7 +13,7 @@
 mkdir ngs_assignment && cd ngs_assignment
 wget -c ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR879/SRR8797509/SRR8797509.sra
 
-### 02.Prepare the data ###
+### 02.Preparing the data ###
 #Converting SRA file to FastQ file and spliting R1 and R2 using SRA Toolkit
 fastq-dump -I --split-files SRR8797509.sra
 
@@ -115,7 +115,7 @@ do
 	samtools flagstat s$i-unshuffled-pe-trim.sam > s$i-unshuffled-pe-trim.stat
 done
 
-#Align shuffled data with HISAT
+#Aligning shuffled data with HISAT
 #Generating Reference Genome Index
 hisat2-build  Homo_sapiens.GRCh38.dna.chromosome.22.fa  Homo_sapiens.GRCh38.dna.chromosome.22.ht2
 
@@ -134,5 +134,36 @@ do
 done
 
 ### 06.Assembly ###
+#Converting SAM to BAM
+for i in unshuffled shuffled;
+do
+	for x in {1..5};
+	do
+		samtools view -bS s$x-$i-pe-trim.sam > s$x-$i-pe-trim.bam
+		samtools sort s$x-$i-pe-trim.bam -o s$x-$i-pe-trim.sorted.bam
+	done
+done
+
+#Assembly without known annotation
+for i in unshuffled shuffled;
+do
+	for x in {1..5};
+	do
+		stringtie s$x-$i-pe-trim.sorted.bam --rf -l ref_free -o s$x-$i-pe-trim.sorted.gtf
+	done
+done
+
+#Assembly with known annotation
+#Downloading GFF3 annotation file
+wget ftp://ftp.ensembl.org/pub/release-96/gff3/homo_sapiens/Homo_sapiens.GRCh38.96.chromosome.22.gff3.gz
+gunzip Homo_sapiens.GRCh38.96.chromosome.22.gff3.gz
+
+for i in unshuffled shuffled;
+do
+       	for x in {1..5};
+	do
+		stringtie s$x-$i-pe-trim.sorted.bam --rf -l ref_sup -G Homo_sapiens.GRCh38.96.chromosome.22.gff3 -o s$x-$i-pe-trim.sorted_r.gtf
+	done
+done
 
 
