@@ -13,14 +13,14 @@
 mkdir ngs_assignment && cd ngs_assignment
 wget -c ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/SRR879/SRR8797509/SRR8797509.sra
 
-### 02.Preparing the data ###
+### 02.Preparing the data files ###
 #Converting SRA file to FastQ file and spliting R1 and R2 using SRA Toolkit
 fastq-dump -I --split-files SRR8797509.sra
 
-#Creating specific directores for shuffled and unshuffled fastq files
+#Creating specific directories for shuffled and unshuffled fastq files
 mkdir -p unshuffled/ shuffled/
 
-#Moving and renaming R1 and R2 files
+#Moving and renaming Read1 and Read2 files
 mv SRR8797509_1.fastq unshuffled/SRR8797509_1_unshuffled.fastq
 mv SRR8797509_2.fastq unshuffled/SRR8797509_2_unshuffled.fastq
 
@@ -94,7 +94,7 @@ do
 done
 
 ### 05.Alignment ###
-#Downloading reference genome
+#Downloading reference genome (Chromosome 22) from Ensembl
 wget ftp://ftp.ensembl.org/pub/release-96/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
 gunzip Homo_sapiens.GRCh38.dna.chromosome.22.fa.gz
 
@@ -115,7 +115,7 @@ do
 	samtools flagstat s$i-unshuffled-pe-trim.sam > s$i-unshuffled-pe-trim.stat
 done
 
-#Aligning shuffled data with HISAT
+#Aligning shuffled data with HISAT2
 #Generating Reference Genome Index
 hisat2-build  Homo_sapiens.GRCh38.dna.chromosome.22.fa  Homo_sapiens.GRCh38.dna.chromosome.22.ht2
 
@@ -166,7 +166,6 @@ do
 	done
 done
 
-
 ### 07. GTF Compare ###
 #Downloading GTF Compare python script
 wget https://raw.githubusercontent.com/abdelrahmanMA/gtf-compare/master/code/comp.py
@@ -186,7 +185,13 @@ done
 featureCounts -a Homo_sapiens.GRCh38.96.chromosome.22.gff3 -g exon_id -o counts.txt  *unshuffled-pe-trim.sorted.bam  *shuffled-pe-trim.sorted.bam
 cat counts.txt | cut -f 1,7-16 > simple_counts.txt
 
+#Downloading Rscripts for DESeq and Heatmap
+wget -c https://raw.githubusercontent.com/mr-eyes/nu-ngs01/master/Day-6/deseq1.r
+wget -c https://raw.githubusercontent.com/mr-eyes/nu-ngs01/master/Day-6/draw-heatmap.r
+
 #Analysing the counts with DESeq1
 cat simple_counts.txt | Rscript deseq1.r 5x5 > results_deseq1.tsv
 cat results_deseq1.tsv | awk ' $8 < 0.05 { print $0 }' > filtered_results_deseq1.tsv
 cat filtered_results_deseq1.tsv | Rscript draw-heatmap.r > hisat_output.pdf
+
+### The End ###
