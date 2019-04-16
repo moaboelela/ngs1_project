@@ -167,18 +167,15 @@ do
 done
 
 ### 07. GTF Compare ###
+#Using GTF Compare
 #Downloading GTF Compare python script
 wget https://raw.githubusercontent.com/abdelrahmanMA/gtf-compare/master/code/comp.py
 wget https://raw.githubusercontent.com/abdelrahmanMA/gtf-compare/master/code/stat.py
+pypy3 comp.py -r Homo_sapiens.GRCh38.96.chromosome.22.gff3  *pe-trim.sorted_r.gtf
+pypy3 stat.py
 
-for i in unshuffled shuffled;
-do
-	for x in {1..5};
-	do
-		pypy3 comp.py -r Homo_sapiens.GRCh38.96.chromosome.22.gff3  s$x-$i-pe-trim.sorted_r.gtf
-		pypy3 stat.py
-	done
-done
+#Using GFF Compare
+gffcompare -r Homo_sapiens.GRCh38.96.chromosome.22.gff3  *pe-trim.sorted_r.gtf
 
 ### 08. Defferintial gene expression ###
 #Quantification
