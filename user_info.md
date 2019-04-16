@@ -1,4 +1,5 @@
-Name: Mohamed Magdy AboelEla
-Email: m.aboelela@nu.edu.eg
-ID: 181014
+# Personal Information:
+- **Name:** `Mohamed Magdy AboelEla`
+- **Email:** `m.aboelela@nu.edu.eg`
+- **ID:** `181014`
 
