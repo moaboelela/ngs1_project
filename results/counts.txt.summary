@@ -1,0 +1,13 @@
+Status	s1-unshuffled-pe-trim.sorted.bam	s2-unshuffled-pe-trim.sorted.bam	s3-unshuffled-pe-trim.sorted.bam	s4-unshuffled-pe-trim.sorted.bam	s5-unshuffled-pe-trim.sorted.bam	s1-shuffled-pe-trim.sorted.bam	s1-unshuffled-pe-trim.sorted.bam	s2-shuffled-pe-trim.sorted.bam	s2-unshuffled-pe-trim.sorted.bam	s3-shuffled-pe-trim.sorted.bam	s3-unshuffled-pe-trim.sorted.bam	s4-shuffled-pe-trim.sorted.bam	s4-unshuffled-pe-trim.sorted.bam	s5-shuffled-pe-trim.sorted.bam	s5-unshuffled-pe-trim.sorted.bam
+Assigned	35641	13192	79032	78729	79828	12613	35641	12570	13192	12751	79032	12512	78729	12721	79828
+Unassigned_Unmapped	787721	286293	1734113	1736765	1736358	1686509	787721	1685939	286293	1685708	1734113	1685989	1736765	1686605	1736358
+Unassigned_MappingQuality	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_MultiMapping	0	0	0	0	0	2353	0	2055	0	2044	0	2207	0	1990	0
+Unassigned_Secondary	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_NoFeatures	42551	15821	95118	95851	94317	4469	42551	4411	15821	4311	95118	4400	95851	4400	94317
+Unassigned_Overlapping_Length	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Unassigned_Ambiguity	30633	10900	68558	67675	67934	36637	30633	37655	10900	37327	68558	36949	67675	37082	67934
