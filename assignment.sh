@@ -187,6 +187,6 @@ featureCounts -a Homo_sapiens.GRCh38.96.chromosome.22.gff3 -g exon_id -o counts.
 cat counts.txt | cut -f 1,7-16 > simple_counts.txt
 
 #Analysing the counts with DESeq1
-cat simple_counts.txt | Rscript deseq1.r 5×5 > results_deseq1.tsv
+cat simple_counts.txt | Rscript deseq1.r 5x5 > results_deseq1.tsv
 cat results_deseq1.tsv | awk ' $8 < 0.05 { print $0 }' > filtered_results_deseq1.tsv
 cat filtered_results_deseq1.tsv | Rscript draw-heatmap.r > hisat_output.pdf
