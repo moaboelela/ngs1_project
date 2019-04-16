@@ -176,7 +176,7 @@ for i in unshuffled shuffled;
 do
 	for x in {1..5};
 	do
-		pypy3 comp.py -r Homo_sapiens.GRCh38.96.chromosome.22.gff3 *.gtf
+		pypy3 comp.py -r Homo_sapiens.GRCh38.96.chromosome.22.gff3  s$x-$i-pe-trim.sorted_r.gtf
 		pypy3 stat.py
 	done
 done
