@@ -183,8 +183,8 @@ done
 
 ### 08. Defferintial gene expression ###
 #Quantification
-featureCounts -a Homo_sapiens.GRCh38.96.chromosome.22.gff3 -g exon_id -o counts.txt  *unshuffled-pe-trim.sorted.bam  shuffled-pe-trim.sorted.bam
-cat counts.txt | cut -f 1,7-12 > simple_counts.txt
+featureCounts -a Homo_sapiens.GRCh38.96.chromosome.22.gff3 -g exon_id -o counts.txt  *unshuffled-pe-trim.sorted.bam  *shuffled-pe-trim.sorted.bam
+cat counts.txt | cut -f 1,7-16 > simple_counts.txt
 
 #Analysing the counts with DESeq1
 cat simple_counts.txt | Rscript deseq1.r 5×5 > results_deseq1.tsv
